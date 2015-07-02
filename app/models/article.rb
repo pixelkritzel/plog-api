@@ -1,5 +1,9 @@
 class Article < ActiveRecord::Base
   before_create :add_url_slug
+
+  def self.find_by_id_or_slug(id)
+    Article.where('id=? OR slug=?', id, id)
+  end
 end
 
 def add_url_slug
